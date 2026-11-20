@@ -1,5 +1,4 @@
 import {
-	Box,
 	Button,
 	ButtonGroup,
 	Field,
@@ -156,16 +155,22 @@ export const ChangePassphrase = () => {
 							<FieldHint id={passphraseHintId}>
 								<Trans i18nKey='Enter_current_E2EE_password_to_set_new'>
 									To set a new password, first
-									<Box
-										is='a'
-										href='#'
+									<a
+										href='#decode-key'
+										role='button'
 										onClick={async (e) => {
 											e.preventDefault();
 											await e2e.decodePrivateKeyFlow();
 										}}
+										onKeyDown={async (e) => {
+											if (e.key === ' ' || e.key === 'Spacebar') {
+												e.preventDefault();
+												await e2e.decodePrivateKeyFlow();
+											}
+										}}
 									>
 										enter your current E2EE password.
-									</Box>
+									</a>
 								</Trans>
 							</FieldHint>
 						)}
